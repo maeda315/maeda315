@@ -1,4 +1,9 @@
+const path = require('path')
+
 module.exports = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')]
+  },
   distDir: 'build',
   reactStrictMode: true,
   poweredByHeader: false
