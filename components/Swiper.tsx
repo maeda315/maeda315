@@ -21,7 +21,7 @@ export default function Carousel(): JSX.Element {
       img: '/swiper/orw.png',
       imgLink: 'https://one-recording-weight.com/',
       text: 'Dart × Flutter',
-      textLink: 'https://github.com/maeda315/one_recording_weight'
+      textLink: 'https://github.com/maeda315/OneRecordingWeight'
     }
   ]
 
