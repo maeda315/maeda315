@@ -1,0 +1,28 @@
+@import 'global';
+
+.wrap {
+  margin-top: 40px;
+
+  @include mq-down(md) {
+    margin-top: get_vw(40);
+  }
+}
+
+.img {
+  height: 300px;
+  background-size: cover;
+  background-position: center center;
+
+  @include mq-down(md) {
+    height: get_vw(200);
+  }
+}
+
+.p {
+  text-align: center;
+  margin-top: 20px;
+
+  &__link {
+    color: inherit;
+  }
+}

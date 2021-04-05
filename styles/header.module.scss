@@ -3,5 +3,9 @@
 .hilight {
   font-size: 2rem;
   text-align: center;
-  margin: 20px auto;
+  margin-top: 40px;
+
+  @include mq-down(md) {
+    margin-top: get_vw(40);
+  }
 }

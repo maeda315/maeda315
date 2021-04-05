@@ -1,0 +1,64 @@
+import { Swiper, SwiperSlide } from 'swiper/react'
+
+import 'swiper/swiper-bundle.min.css'
+import swiper from '../styles/swiper.module.scss'
+
+export default function Carousel(): JSX.Element {
+  const slides = [
+    {
+      img: '/swiper/fcowl.png',
+      imgLink: 'http://fcowl.com.s3-website-ap-northeast-1.amazonaws.com/',
+      text: 'Nuxt.js × Firebase × AWS',
+      textLink: 'https://github.com/maeda315/fcowl'
+    },
+    {
+      img: '/swiper/maeda315.png',
+      imgLink: '/',
+      text: 'Next.js × WordPress',
+      textLink: 'https://github.com/maeda315/maeda315'
+    },
+    {
+      img: '/swiper/orw.png',
+      imgLink: 'https://one-recording-weight.com/',
+      text: 'Dart × Flutter',
+      textLink: 'https://github.com/maeda315/one_recording_weight'
+    }
+  ]
+
+  return (
+    <Swiper
+      className={swiper.wrap}
+      slidesPerView={3}
+      loop={true}
+      breakpoints={{
+        0: {
+          slidesPerView: 1
+        },
+        768: {
+          slidesPerView: 3
+        }
+      }}
+    >
+      {slides.map((slide, index) => (
+        <SwiperSlide key={index}>
+          <a href={slide.imgLink} target="_blank" rel="noreferrer">
+            <div
+              style={{ backgroundImage: `url(${slide.img})` }}
+              className={swiper.img}
+            />
+          </a>
+          <p className={swiper.p}>
+            <a
+              href={slide.textLink}
+              className={swiper.p__link}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <>{slide.text}</>
+            </a>
+          </p>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  )
+}
