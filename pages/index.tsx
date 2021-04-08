@@ -5,21 +5,6 @@ import Link from 'next/link'
 const App: React.FC = () => {
   return (
     <>
-      <p className={index.search}>
-        <input type="text" className={index.search__text}></input>
-        <span className={index.search__kakeru}>×</span>
-        <select name="pets" className={index.search__select}>
-          <option value="amp">AMP</option>
-          <option value="dart">Dart</option>
-          <option value="html/css">HTML / CSS</option>
-          <option value="javascriipt">JavaScript</option>
-        </select>
-        <input
-          type="submit"
-          className={index.search__submit}
-          value="検索"
-        ></input>
-      </p>
       <div className={index.articles}>
         <article className={index.article}>
           <Link href="#">
