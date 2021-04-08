@@ -14,7 +14,7 @@ export default function Carousel(): JSX.Element {
     {
       img: '/swiper/maeda315.png',
       imgLink: '/',
-      text: 'Next.js × WordPress',
+      text: 'Next.js × GraphQL × AMP',
       textLink: 'https://github.com/maeda315/maeda315'
     },
     {

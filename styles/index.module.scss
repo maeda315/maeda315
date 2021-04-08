@@ -1,0 +1,80 @@
+@import 'global';
+
+.wrap {
+  h2 {
+    font-size: 1.2rem;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+  .search {
+    text-align: center;
+    height: 30px;
+    margin-top: 20px;
+    vertical-align: middle;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    &__kakeru,
+    &__text,
+    &__kakeru,
+    &__select {
+      margin-right: 15px;
+    }
+    &__kakeru {
+      font-size: 1rem;
+    }
+    &__text,
+    select {
+      width: 200px;
+      height: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    &__submit {
+      width: 50px;
+      height: 100%;
+      vertical-align: top;
+    }
+  }
+}
+
+.articles {
+  background: #f2f2f2;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 25px 50px 0;
+  box-sizing: border-box;
+
+  &:last-of-type {
+    padding-bottom: 25px;
+  }
+}
+
+.article {
+  display: block;
+  width: calc(20% - 20px);
+  padding: 10px;
+  margin: 10px;
+  box-sizing: border-box;
+  background: $white;
+  border-radius: 5px;
+  a {
+    color: inherit;
+    text-decoration: none;
+    > *:first-child {
+      display: flex;
+      align-items: center;
+      min-height: 150px;
+    }
+  }
+  &__img {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+  &__highlight {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-top: 5px;
+  }
+}

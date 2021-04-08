@@ -5,9 +5,9 @@ export default function Header(): JSX.Element {
   return (
     <>
       <footer>
-        <h2 className={footer.hilight}>
-          <small className={footer.hilight__small}>&copy; 2021 Mada315</small>
-        </h2>
+        <h1 className={footer.highlight}>
+          <small className={footer.highlight__small}>&copy; 2021 Mada315</small>
+        </h1>
       </footer>
     </>
   )

@@ -1,6 +1,11 @@
-.hilight {
+@import 'global';
+
+.highlight {
   text-align: center;
+  padding: 25px 0;
+  background: $black;
+  color: $white;
   &__small {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 }
