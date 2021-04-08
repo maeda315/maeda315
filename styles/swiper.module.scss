@@ -12,9 +12,13 @@
 
 .p {
   text-align: center;
-  margin-top: 20px;
+  padding-top: 20px;
 
   &__link {
     color: inherit;
+  }
+  @include mq-down(md) {
+    font-size: get_vw(12);
+    padding: get_vw(10) 0;
   }
 }

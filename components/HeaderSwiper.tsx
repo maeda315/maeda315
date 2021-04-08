@@ -34,7 +34,7 @@ export default function Carousel(): JSX.Element {
         0: {
           slidesPerView: 1
         },
-        768: {
+        769: {
           slidesPerView: 3
         }
       }}
