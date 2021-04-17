@@ -6,7 +6,9 @@ export default function Header(): JSX.Element {
     <>
       <footer>
         <h1 className={footer.highlight}>
-          <small className={footer.highlight__small}>&copy; 2021 Mada315</small>
+          <small className={footer.highlight__small}>
+            &copy; 2021 Maeda315
+          </small>
         </h1>
       </footer>
     </>
