@@ -34,7 +34,7 @@ export async function getAllPosts(): Promise<PostType[]> {
         id
         featuredImage {
           node {
-            link
+            mediaItemUrl
           }
         }
         categories {

@@ -4,190 +4,70 @@ import Link from 'next/link'
 import { getAllPosts } from '../lib/api'
 import { PostType } from '../modules/interface'
 
+interface newAllPostsType {
+  id: number
+  posts: PostType[]
+}
+
 interface AllPostsType {
   props: {
-    allPosts: PostType[]
+    newAllPosts: newAllPostsType[]
   }
 }
 
 export async function getStaticProps(): Promise<AllPostsType> {
-  const allPosts = await getAllPosts()
+  const allPosts = await (await getAllPosts()).reverse()
   // categoryId を抽出し、ユニークのみにする。
   let allPostsId: number[] = allPosts.map(
     (n) => n.categories.nodes[0].categoryId
   )
   allPostsId = [...new Set(allPostsId)]
   // ユニークの categoryId を新しい配列に格納する
-  const newAllPosts: {
-    id: number
-    posts?: AllPostsType
-  }[] = []
+  const newAllPosts: newAllPostsType[] = []
   for (const n of allPostsId) {
     newAllPosts.push({
-      id: n
+      id: n,
+      posts: []
     })
   }
-  console.log(newAllPosts)
   // 該当の categoryId に記事を格納する
+  allPosts.map((n) => {
+    newAllPosts.find((n2) => {
+      if (n2.id === n.categories.nodes[0].categoryId) n2.posts.push(n)
+    })
+  })
+  console.log(newAllPosts)
+
   return {
-    props: {
-      allPosts
-    }
+    props: { newAllPosts }
   }
 }
 
-const App: React.FC = () => {
+const App: React.FC = ({ newAllPosts }) => {
+  console.log(newAllPosts)
   return (
     <>
-      <div className={index.articles}>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <div
-                style={{ backgroundImage: `url(/swiper/fcowl.png)` }}
-                className={index.article__img}
-              />
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <div
-                style={{ backgroundImage: `url(/swiper/fcowl.png)` }}
-                className={index.article__img}
-              />
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <div
-                style={{ backgroundImage: `url(/swiper/fcowl.png)` }}
-                className={index.article__img}
-              />
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <div
-                style={{ backgroundImage: `url(/swiper/fcowl.png)` }}
-                className={index.article__img}
-              />
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <div
-                style={{ backgroundImage: `url(/swiper/fcowl.png)` }}
-                className={index.article__img}
-              />
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <div
-                style={{ backgroundImage: `url(/swiper/fcowl.png)` }}
-                className={index.article__img}
-              />
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <div
-                style={{ backgroundImage: `url(/swiper/fcowl.png)` }}
-                className={index.article__img}
-              />
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-      </div>
-      <div className={index.articles}>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-        <article className={index.article}>
-          <Link href="#">
-            <a>
-              <h2 className={index.article__highlight}>
-                ここにタイトルが入ります。
-              </h2>
-            </a>
-          </Link>
-        </article>
-      </div>
+      {newAllPosts.map((n) => (
+        <div className={index.articles} key={n.id}>
+          {n.posts.map((post) => (
+            <article className={index.article} key={post.id}>
+              <Link href={`posts/${post.id}`}>
+                <a>
+                  {post.featuredImage && (
+                    <div
+                      style={{
+                        backgroundImage: `url(${post.featuredImage.node.mediaItemUrl})`
+                      }}
+                      className={index.article__img}
+                    />
+                  )}
+                  <h2 className={index.article__highlight}>{post.title}</h2>
+                </a>
+              </Link>
+            </article>
+          ))}
+        </div>
+      ))}
     </>
   )
 }
