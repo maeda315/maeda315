@@ -2,22 +2,7 @@ import React from 'react'
 import index from '../styles/index.module.scss'
 import Link from 'next/link'
 import { getAllPosts } from '../lib/api'
-import { PostType } from '../modules/interface'
-
-interface NewAllPostsType {
-  id: number
-  posts: PostType[]
-}
-
-interface AllPostsType {
-  props: {
-    newAllPosts: NewAllPostsType[]
-  }
-}
-
-interface AppProps {
-  newAllPosts: NewAllPostsType[]
-}
+import { NewAllPostsType, AllPostsType, AppProps } from '../modules/interface'
 
 export async function getStaticProps(): Promise<AllPostsType> {
   const allPosts = await getAllPosts()

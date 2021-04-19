@@ -12,3 +12,18 @@ export interface PostType {
     }
   }
 }
+
+export interface NewAllPostsType {
+  id: number
+  posts: PostType[]
+}
+
+export interface AllPostsType {
+  props: {
+    newAllPosts: NewAllPostsType[]
+  }
+}
+
+export interface AppProps {
+  newAllPosts: NewAllPostsType[]
+}
