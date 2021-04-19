@@ -4,26 +4,31 @@ import Link from 'next/link'
 import { getAllPosts } from '../lib/api'
 import { PostType } from '../modules/interface'
 
-interface newAllPostsType {
+interface NewAllPostsType {
   id: number
   posts: PostType[]
 }
 
 interface AllPostsType {
   props: {
-    newAllPosts: newAllPostsType[]
+    newAllPosts: NewAllPostsType[]
   }
 }
 
+interface AppProps {
+  newAllPosts: NewAllPostsType[]
+}
+
 export async function getStaticProps(): Promise<AllPostsType> {
-  const allPosts = await (await getAllPosts()).reverse()
+  const allPosts = await getAllPosts()
+
   // categoryId を抽出し、ユニークのみにする。
   let allPostsId: number[] = allPosts.map(
     (n) => n.categories.nodes[0].categoryId
   )
   allPostsId = [...new Set(allPostsId)]
   // ユニークの categoryId を新しい配列に格納する
-  const newAllPosts: newAllPostsType[] = []
+  const newAllPosts: NewAllPostsType[] = []
   for (const n of allPostsId) {
     newAllPosts.push({
       id: n,
@@ -36,15 +41,13 @@ export async function getStaticProps(): Promise<AllPostsType> {
       if (n2.id === n.categories.nodes[0].categoryId) n2.posts.push(n)
     })
   })
-  console.log(newAllPosts)
 
   return {
     props: { newAllPosts }
   }
 }
 
-const App: React.FC = ({ newAllPosts }) => {
-  console.log(newAllPosts)
+const App: React.FC<AppProps> = ({ newAllPosts }) => {
   return (
     <>
       {newAllPosts.map((n) => (

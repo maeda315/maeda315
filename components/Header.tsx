@@ -2,12 +2,12 @@ import React, { createRef } from 'react'
 import HeaderSwiper from './HeaderSwiper'
 import header from '../styles/header.module.scss'
 
-interface MyState {
+interface State {
   top: number
   height: number
 }
 
-export default class Header extends React.Component<void, MyState> {
+export default class Header extends React.Component<unknown, State> {
   private searchInput = createRef<HTMLInputElement>()
   private prevY: number
   private sp = 768

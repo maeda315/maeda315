@@ -57,7 +57,6 @@
   }
   @include mq-down(md) {
     width: 100%;
-    padding: get_vw(10);
     margin: get_vw(15) get_vw(10) 0;
     a {
       > *:first-child {

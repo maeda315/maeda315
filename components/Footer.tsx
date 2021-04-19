@@ -1,7 +1,7 @@
 import React from 'react'
 import footer from '../styles/footer.module.scss'
 
-export default function Header(): JSX.Element {
+export default function Footer(): JSX.Element {
   return (
     <>
       <footer>
