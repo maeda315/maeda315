@@ -1,11 +1,13 @@
+import getConfig from 'next/config'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { CategoryType } from '../modules/commonType'
-import { allCategories } from '../lib/wp'
-const API_URL = process.env.WP_API_URL
+const { publicRuntimeConfig } = getConfig()
+export const API_URL = publicRuntimeConfig.WP_API_URL
 
-export const fetchAsyncGet = createAsyncThunk<CategoryType[], string>(
-  'wp/get',
-  async (query = allCategories) => {
+export const fetchAsyncCategories = createAsyncThunk<CategoryType, string>(
+  'wp/post',
+  async (query: string) => {
+    console.log('fetchAsyncGet')
     const headers = { 'Content-Type': 'application/json' }
     const res = await fetch(API_URL, {
       method: 'POST',
@@ -15,29 +17,32 @@ export const fetchAsyncGet = createAsyncThunk<CategoryType[], string>(
 
     const json = await res.json()
     if (json.errors) {
-      console.log(json.errors)
       console.log('error details', query)
       throw new Error('Failed to fetch API')
     }
+
     return json.data
   }
 )
 
 interface InitialStateType {
-  categories: CategoryType[]
+  categories: unknown
 }
 
 const wpSlice = createSlice({
-  name: 'wp',
+  name: 'header',
   initialState: {
     categories: []
   } as InitialStateType,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchAsyncGet.fulfilled, (state, { payload }) => {
-      state.categories = payload
+    builder.addCase(fetchAsyncCategories.fulfilled, (state, { payload }) => {
+      console.log('build', payload)
+      state.categories = payload.categories.nodes
     })
   }
 })
+
+export const selectCategories = (state) => state.header.categories
 
 export default wpSlice.reducer

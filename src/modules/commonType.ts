@@ -14,8 +14,11 @@ export interface PostType {
 }
 
 export interface CategoryType {
-  categoryId: number
-  name: string
+  categories: {
+    nodes: {
+      [index: string]: string
+    }
+  }
 }
 
 export interface NewAllPostsType {

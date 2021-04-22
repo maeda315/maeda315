@@ -1,9 +1,15 @@
-import React, { createRef, useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAsyncCategories, selectCategories } from './headerSlice'
+import { allCategories } from '../lib/wp'
 import Carousel from './Carousel'
 import header from '../styles/header.module.scss'
 
 const Header = (): JSX.Element => {
+  const dispath = useDispatch()
   const searchInput = useRef(null)
+  const categories = useSelector(selectCategories)
+  console.log('Header', categories)
   const [menuTop, setMenuTop] = useState(0)
   const [menuHeight, setMenuHeight] = useState(0)
   let prevY: number
@@ -48,6 +54,7 @@ const Header = (): JSX.Element => {
 
   useEffect(() => {
     resizeWindow()
+    dispath(fetchAsyncCategories(allCategories))
     window.addEventListener('resize', resizeWindow)
   }, [])
 
@@ -64,10 +71,11 @@ const Header = (): JSX.Element => {
         <input type="text" className={header.search__text}></input>
         <span className={header.search__kakeru}>×</span>
         <select name="pets" className={header.search__select}>
-          <option value="amp">AMP</option>
-          <option value="dart">Dart</option>
-          <option value="html/css">HTML / CSS</option>
-          <option value="javascriipt">JavaScript</option>
+          {categories.map((n) => (
+            <option value={n.categoryId} key={n.categoryId}>
+              {n.name}
+            </option>
+          ))}
         </select>
         <input
           type="submit"
