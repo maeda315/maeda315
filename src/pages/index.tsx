@@ -1,10 +1,18 @@
 import React from 'react'
 import index from '../styles/index.module.scss'
 import Link from 'next/link'
-import { getAllPosts } from '../lib/api'
-import { NewAllPostsType, AllPostsType, AppProps } from '../modules/interface'
+import { getAllPosts, getAllCategories } from '../lib/api'
+import { NewAllPostsType } from '../modules/commonType'
 
-export async function getStaticProps(): Promise<AllPostsType> {
+interface StaticProps {
+  newAllPosts: NewAllPostsType[]
+}
+
+interface StaticPropsType {
+  props: StaticProps
+}
+
+export async function getStaticProps(): Promise<StaticPropsType> {
   const allPosts = await getAllPosts()
 
   // categoryId を抽出し、ユニークのみにする。
@@ -12,6 +20,7 @@ export async function getStaticProps(): Promise<AllPostsType> {
     (n) => n.categories.nodes[0].categoryId
   )
   allPostsId = [...new Set(allPostsId)]
+  console.log(allPostsId)
   // ユニークの categoryId を新しい配列に格納する
   const newAllPosts: NewAllPostsType[] = []
   for (const n of allPostsId) {
@@ -32,7 +41,7 @@ export async function getStaticProps(): Promise<AllPostsType> {
   }
 }
 
-const App: React.FC<AppProps> = ({ newAllPosts }) => {
+const App: React.FC<StaticProps> = ({ newAllPosts }) => {
   return (
     <>
       {newAllPosts.map((n) => (

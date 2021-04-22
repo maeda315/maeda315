@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
 import swiper from '../styles/swiper.module.scss'
 
-export default function Carousel(): JSX.Element {
+const Carousel = (): JSX.Element => {
   const slides = [
     {
       img: '/swiper/fcowl.png',
@@ -62,3 +62,5 @@ export default function Carousel(): JSX.Element {
     </Swiper>
   )
 }
+
+export default Carousel

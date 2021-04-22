@@ -1,0 +1,82 @@
+import React, { createRef, useEffect, useState, useRef } from 'react'
+import Carousel from './Carousel'
+import header from '../styles/header.module.scss'
+
+const Header = (): JSX.Element => {
+  const searchInput = useRef(null)
+  const [menuTop, setMenuTop] = useState(0)
+  const [menuHeight, setMenuHeight] = useState(0)
+  let prevY: number
+  const sp = 768
+
+  const searchTouchMove = (e: React.TouchEvent<HTMLInputElement>) => {
+    if (window.innerWidth <= sp) {
+      document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+      const currentY = e.targetTouches[0].pageY
+      const touchValue = 3
+      const touchRange = menuHeight - 10
+      if (currentY > prevY && menuTop <= 0) {
+        setMenuTop(
+          menuTop + touchValue > -touchRange ? 0 : menuTop + touchValue
+        )
+      } else if (currentY < prevY && menuTop >= -menuHeight) {
+        // 上にスクロール
+        setMenuTop(
+          menuTop - touchValue < -menuHeight + touchRange
+            ? -menuHeight
+            : menuTop - touchValue
+        )
+      }
+      prevY = currentY
+    }
+  }
+
+  const searchTouchEnd = () => {
+    document.getElementsByTagName('body')[0].style.overflow = ''
+  }
+
+  const resizeWindow = () => {
+    console.log('resizeWindow', searchInput)
+    if (window.innerWidth <= sp) {
+      setMenuTop(-searchInput.current.clientHeight - 1)
+      setMenuHeight(searchInput.current.clientHeight + 1)
+    } else {
+      setMenuTop(0)
+      setMenuHeight(0)
+    }
+  }
+
+  useEffect(() => {
+    resizeWindow()
+    window.addEventListener('resize', resizeWindow)
+  }, [])
+
+  return (
+    <>
+      <Carousel />
+      <div
+        className={header.search}
+        ref={searchInput}
+        style={{ top: `${menuTop}px` }}
+        onTouchMove={searchTouchMove.bind(this)}
+        onTouchEnd={searchTouchEnd}
+      >
+        <input type="text" className={header.search__text}></input>
+        <span className={header.search__kakeru}>×</span>
+        <select name="pets" className={header.search__select}>
+          <option value="amp">AMP</option>
+          <option value="dart">Dart</option>
+          <option value="html/css">HTML / CSS</option>
+          <option value="javascriipt">JavaScript</option>
+        </select>
+        <input
+          type="submit"
+          className={header.search__submit}
+          value="検索"
+        ></input>
+      </div>
+    </>
+  )
+}
+
+export default Header
