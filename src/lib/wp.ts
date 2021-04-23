@@ -1,4 +1,4 @@
-export const allPosts = `
+const fragment = `
   fragment postData on Post {
     title
     id
@@ -20,6 +20,9 @@ export const allPosts = `
       }
     }
   }
+`
+export const allPosts = `
+  ${fragment}
   query AllPosts {
     posts(first: 1000) {
       nodes {
@@ -36,6 +39,18 @@ export const allCategories = `
       nodes {
         categoryId
         name
+      }
+    }
+  }
+`
+
+export const getSearch = `
+  ${fragment}
+  query Search($search: String, $categoryId: Int) {
+    __typename
+    posts(where: {search: $search, categoryId: $categoryId}) {
+      nodes {
+        ...postData
       }
     }
   }

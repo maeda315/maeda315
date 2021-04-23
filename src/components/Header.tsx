@@ -1,15 +1,20 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAsyncCategories, selectCategories } from './headerSlice'
-import { allCategories } from '../lib/wp'
+import {
+  fetchAsyncCategories,
+  selectCategories,
+  fetchAsyncSearch
+} from './headerSlice'
+import { allCategories, getSearch } from '../lib/wp'
 import Carousel from './Carousel'
 import header from '../styles/header.module.scss'
 
 const Header = (): JSX.Element => {
   const dispath = useDispatch()
-  const searchInput = useRef(null)
+  const searchWrap = useRef(null)
+  const searchText = useRef(null)
+  const searchSelect = useRef(null)
   const categories = useSelector(selectCategories)
-  console.log('Header', categories)
   const [menuTop, setMenuTop] = useState(0)
   const [menuHeight, setMenuHeight] = useState(0)
   let prevY: number
@@ -42,14 +47,26 @@ const Header = (): JSX.Element => {
   }
 
   const resizeWindow = () => {
-    console.log('resizeWindow', searchInput)
+    console.log('resizeWindow', searchWrap)
     if (window.innerWidth <= sp) {
-      setMenuTop(-searchInput.current.clientHeight - 1)
-      setMenuHeight(searchInput.current.clientHeight + 1)
+      setMenuTop(-searchWrap.current.clientHeight - 1)
+      setMenuHeight(searchWrap.current.clientHeight + 1)
     } else {
       setMenuTop(0)
       setMenuHeight(0)
     }
+  }
+
+  const searchButton = () => {
+    dispath(
+      fetchAsyncSearch({
+        query: getSearch,
+        variables: {
+          search: searchText.current.value,
+          categoryId: +searchSelect.current.value
+        }
+      })
+    )
   }
 
   useEffect(() => {
@@ -63,14 +80,22 @@ const Header = (): JSX.Element => {
       <Carousel />
       <div
         className={header.search}
-        ref={searchInput}
+        ref={searchWrap}
         style={{ top: `${menuTop}px` }}
         onTouchMove={searchTouchMove.bind(this)}
         onTouchEnd={searchTouchEnd}
       >
-        <input type="text" className={header.search__text}></input>
+        <input
+          ref={searchText}
+          type="text"
+          className={header.search__text}
+        ></input>
         <span className={header.search__kakeru}>×</span>
-        <select name="pets" className={header.search__select}>
+        <select
+          name="pets"
+          ref={searchSelect}
+          className={header.search__select}
+        >
           {categories.map((n) => (
             <option value={n.categoryId} key={n.categoryId}>
               {n.name}
@@ -79,6 +104,7 @@ const Header = (): JSX.Element => {
         </select>
         <input
           type="submit"
+          onClick={searchButton}
           className={header.search__submit}
           value="検索"
         ></input>

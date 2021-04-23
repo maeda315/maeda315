@@ -14,6 +14,11 @@ export interface PostType {
 }
 
 export interface CategoryType {
+  name: string
+  categoryId: number
+}
+
+export interface CategoryNodesType {
   categories: {
     nodes: {
       [index: string]: string
@@ -21,7 +26,26 @@ export interface CategoryType {
   }
 }
 
+export interface SearchType {
+  search: string
+  categoryId: number
+}
+
+export interface SearchNodesType {
+  posts: {
+    nodes: SearchType
+  }
+}
+
 export interface NewAllPostsType {
   id: number
   posts: PostType[]
+}
+
+export interface fetchAsyncSearchType {
+  query: string
+  variables: {
+    search: string
+    categoryId: number
+  }
 }
