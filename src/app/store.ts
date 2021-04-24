@@ -6,3 +6,5 @@ export const store = configureStore({
     header: headerReducer
   }
 })
+
+export type AppState = ReturnType<typeof store.getState>

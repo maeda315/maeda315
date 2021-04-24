@@ -1,5 +1,6 @@
 import getConfig from 'next/config'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import type { AppState } from '../app/store'
 import {
   CategoryNodesType,
   CategoryType,
@@ -88,8 +89,9 @@ const wpSlice = createSlice({
 
 export const { newReset } = wpSlice.actions
 
-export const selectCategories = (state) => state.header.categories
-export const selectSearch = (state) => state.header.search
-export const selectReset = (state) => state.header.reset
+export const selectCategories = (state: AppState): unknown =>
+  state.header.categories
+export const selectSearch = (state: AppState): unknown => state.header.search
+export const selectReset = (state: AppState): unknown => state.header.reset
 
 export default wpSlice.reducer
