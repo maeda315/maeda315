@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchAsyncCategories,
   selectCategories,
-  fetchAsyncSearch
+  fetchAsyncSearch,
+  newReset
 } from './headerSlice'
 import { allCategories, getSearch } from '../lib/wp'
 import Carousel from './Carousel'
@@ -47,7 +48,6 @@ const Header = (): JSX.Element => {
   }
 
   const resizeWindow = () => {
-    console.log('resizeWindow', searchWrap)
     if (window.innerWidth <= sp) {
       setMenuTop(-searchWrap.current.clientHeight - 1)
       setMenuHeight(searchWrap.current.clientHeight + 1)
@@ -67,6 +67,10 @@ const Header = (): JSX.Element => {
         }
       })
     )
+  }
+
+  const searchReset = () => {
+    dispath(newReset())
   }
 
   useEffect(() => {
@@ -107,6 +111,12 @@ const Header = (): JSX.Element => {
           onClick={searchButton}
           className={header.search__submit}
           value="検索"
+        ></input>
+        <input
+          type="submit"
+          onClick={searchReset}
+          className={header.search__submit}
+          value="Reset"
         ></input>
       </div>
     </>

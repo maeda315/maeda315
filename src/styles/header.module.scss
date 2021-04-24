@@ -1,11 +1,13 @@
 @import 'global';
 
+$height: 30px;
+
 .search {
   width: 100%;
   box-sizing: border-box;
   position: relative;
   text-align: center;
-  min-height: 30px;
+  min-height: $height;
   margin-top: 20px;
   vertical-align: middle;
   padding: 10px 0;
@@ -17,7 +19,7 @@
   &__text,
   &__kakeru,
   &__select {
-    margin-right: 15px;
+    margin-right: 20px;
   }
   &__kakeru {
     font-size: 1rem;
@@ -25,17 +27,27 @@
   &__text,
   select {
     width: 200px;
-    height: 100%;
+    height: $height;
     padding: 5px;
     box-sizing: border-box;
   }
   &__submit {
     width: 50px;
-    height: 100%;
+    background: $white;
+    border: 1px solid $gray;
+    outline: none;
+    height: $height;
     vertical-align: top;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:last-child {
+      margin-left: 15px;
+    }
   }
   @include mq-down(md) {
-    text-align: left;
     padding: get_vw(15);
     position: fixed;
     top: get_vw(-101);
@@ -61,19 +73,17 @@
     select {
       font-size: get_vw(14);
       height: get_vw(30);
-      width: 80%;
+      width: 100%;
     }
     select {
-      margin: get_vw(10) get_vw(10) 0 0;
+      margin: get_vw(10) 0 0 0;
+      padding: 0;
     }
     &__submit {
-      width: 15%;
+      width: 25%;
+      height: get_vw(30);
       font-size: get_vw(14);
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto;
+      margin-top: get_vw(15);
     }
   }
 }

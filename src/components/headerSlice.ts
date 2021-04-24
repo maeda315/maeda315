@@ -36,7 +36,6 @@ export const fetchAsyncSearch = createAsyncThunk<
   fetchAsyncSearchType
 >('wp/search', async (args) => {
   const { query, variables } = args
-  console.log(123, query, variables)
   const headers = { 'Content-Type': 'application/json' }
   const res = await fetch(API_URL, {
     method: 'POST',
@@ -55,16 +54,22 @@ export const fetchAsyncSearch = createAsyncThunk<
 
 interface InitialStateType {
   categories: Partial<CategoryType>
-  searchRequest: Partial<SearchType>
+  search: Partial<SearchType>
+  reset: boolean
 }
 
 const wpSlice = createSlice({
   name: 'header',
   initialState: {
     categories: [],
-    searchRequest: {}
+    search: [],
+    reset: false
   } as InitialStateType,
-  reducers: {},
+  reducers: {
+    newReset: (state) => {
+      state.reset = !state.reset
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAsyncCategories.fulfilled, (state, { payload }) => {
       return {
@@ -73,16 +78,18 @@ const wpSlice = createSlice({
       }
     })
     builder.addCase(fetchAsyncSearch.fulfilled, (state, { payload }) => {
-      console.log('result', payload.posts.nodes)
       return {
         ...state,
-        searchRequest: payload.posts.nodes
+        search: payload.posts.nodes
       }
     })
   }
 })
 
+export const { newReset } = wpSlice.actions
+
 export const selectCategories = (state) => state.header.categories
 export const selectSearch = (state) => state.header.search
+export const selectReset = (state) => state.header.reset
 
 export default wpSlice.reducer

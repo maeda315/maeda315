@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import index from '../styles/index.module.scss'
 import Link from 'next/link'
-import { getAllPosts, getAllCategories } from '../lib/api'
-import { NewAllPostsType } from '../modules/commonType'
+import { getAllPosts } from '../lib/api'
+import { NewAllPostsType, PostType } from '../modules/commonType'
+import { newReset, selectSearch, selectReset } from '../components/headerSlice'
 
 interface StaticProps {
   newAllPosts: NewAllPostsType[]
@@ -12,15 +14,12 @@ interface StaticPropsType {
   props: StaticProps
 }
 
-export async function getStaticProps(): Promise<StaticPropsType> {
-  const allPosts = await getAllPosts()
-
+function generatePosts(allPosts: PostType[]) {
   // categoryId を抽出し、ユニークのみにする。
   let allPostsId: number[] = allPosts.map(
     (n) => n.categories.nodes[0].categoryId
   )
   allPostsId = [...new Set(allPostsId)]
-  console.log(allPostsId)
   // ユニークの categoryId を新しい配列に格納する
   const newAllPosts: NewAllPostsType[] = []
   for (const n of allPostsId) {
@@ -36,15 +35,43 @@ export async function getStaticProps(): Promise<StaticPropsType> {
     })
   })
 
+  return newAllPosts
+}
+
+export async function getStaticProps(): Promise<StaticPropsType> {
+  const allPosts = await getAllPosts()
+
   return {
-    props: { newAllPosts }
+    props: { newAllPosts: generatePosts(allPosts) }
   }
 }
 
 const App: React.FC<StaticProps> = ({ newAllPosts }) => {
+  const [posts, setPosts] = useState(newAllPosts)
+  const dispath = useDispatch()
+  const firstUpdate = useRef(true)
+  const search = useSelector(selectSearch)
+  const reset = useSelector(selectReset)
+
+  useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false
+      return
+    }
+    setPosts(generatePosts(search))
+  }, [search])
+
+  useEffect(() => {
+    if (reset) {
+      setPosts(newAllPosts)
+      dispath(newReset())
+      return
+    }
+  }, [reset])
+
   return (
     <>
-      {newAllPosts.map((n) => (
+      {posts.map((n) => (
         <div className={index.articles} key={n.id}>
           {n.posts.map((post) => (
             <article className={index.article} key={post.id}>

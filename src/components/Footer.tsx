@@ -7,7 +7,7 @@ const Footer = (): JSX.Element => {
       <footer>
         <h1 className={footer.highlight}>
           <small className={footer.highlight__small}>
-            &copy; 2021 Maeda315
+            &copy; 2020-2021 Maeda315
           </small>
         </h1>
       </footer>
