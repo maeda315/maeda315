@@ -48,7 +48,7 @@ export async function getStaticProps(): Promise<StaticPropsType> {
 
 const App: React.FC<StaticProps> = ({ newAllPosts }) => {
   const [posts, setPosts] = useState(newAllPosts)
-  const dispath = useDispatch()
+  const dispatch = useDispatch()
   const firstUpdate = useRef(true)
   const search = useSelector(selectSearch)
   const reset = useSelector(selectReset)
@@ -64,10 +64,10 @@ const App: React.FC<StaticProps> = ({ newAllPosts }) => {
   useEffect(() => {
     if (reset) {
       setPosts(newAllPosts)
-      dispath(newReset())
+      dispatch(newReset())
       return
     }
-  }, [reset])
+  }, [reset, newAllPosts, dispatch])
 
   return (
     <>

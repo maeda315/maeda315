@@ -8,6 +8,7 @@ import {
   SearchType,
   fetchAsyncSearchType
 } from '../modules/commonType'
+import { PostType } from '../modules/commonType'
 const { publicRuntimeConfig } = getConfig()
 export const API_URL = publicRuntimeConfig.WP_API_URL
 
@@ -89,9 +90,10 @@ const wpSlice = createSlice({
 
 export const { newReset } = wpSlice.actions
 
-export const selectCategories = (state: AppState): unknown =>
-  state.header.categories
-export const selectSearch = (state: AppState): unknown => state.header.search
-export const selectReset = (state: AppState): unknown => state.header.reset
+export const selectCategories = (state: AppState): CategoryType[] =>
+  state.header.categories as CategoryType[]
+export const selectSearch = (state: AppState): PostType[] =>
+  state.header.search as PostType[]
+export const selectReset = (state: AppState): boolean => state.header.reset
 
 export default wpSlice.reducer
