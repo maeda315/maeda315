@@ -77,7 +77,7 @@ const Header = (): JSX.Element => {
     resizeWindow()
     dispath(fetchAsyncCategories(allCategories))
     window.addEventListener('resize', resizeWindow)
-  }, [])
+  }, [dispath])
 
   return (
     <>
