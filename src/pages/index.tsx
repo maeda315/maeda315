@@ -1,10 +1,10 @@
+import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import index from '../styles/index.module.scss'
-import Link from 'next/link'
 import { getAllPosts } from '../lib/api'
 import { NewAllPostsType, PostType } from '../modules/commonType'
 import { newReset, selectSearch, selectReset } from '../components/headerSlice'
+import index from '../styles/index.module.scss'
 
 interface StaticProps {
   newAllPosts: NewAllPostsType[]

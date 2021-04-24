@@ -1,7 +1,7 @@
+import Link from 'next/link'
 import React from 'react'
 import posts from '../../styles/posts.module.scss'
 import index from '../../styles/index.module.scss'
-import Link from 'next/link'
 
 const App: React.FC = () => {
   return (
