@@ -1,4 +1,4 @@
-import { PostType, CategoryType } from '../modules/commonType'
+import { PostType } from '../modules/commonType'
 import { allPosts } from './wp'
 const API_URL = process.env.WP_API_URL
 
