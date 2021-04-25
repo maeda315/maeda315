@@ -37,6 +37,10 @@ export interface SearchNodesType {
   }
 }
 
+export interface AllIdsType {
+  id: number
+}
+
 export interface NewAllPostsType {
   id: number
   posts: PostType[]

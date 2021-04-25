@@ -55,3 +55,36 @@ export const getSearch = `
     }
   }
 `
+export const allIds = `
+  query AllIds {
+    __typename
+    posts(first: 1000) {
+      nodes {
+        id
+      }
+    }
+  }
+`
+
+export const post = `
+  ${fragment}
+  query Post($id: ID!) {
+    __typename
+    post(id: $id) {
+      ...postData
+      content
+    }
+  }
+`
+
+export const releatePosts = `
+  ${fragment}
+  query RelatePosts($categoryId: Int) {
+    __typename
+    posts(first: 1000, where: {categoryId: $categoryId}) {
+      nodes {
+        ...postData
+      }
+    }
+  }
+`

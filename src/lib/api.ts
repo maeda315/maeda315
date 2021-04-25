@@ -1,8 +1,8 @@
-import { PostType } from '../modules/commonType'
-import { allPosts } from './wp'
+import { PostType, AllIdsType } from '../modules/commonType'
+import { allPosts, allIds, post, releatePosts } from './wp'
 const API_URL = process.env.WP_API_URL
 
-async function fetchAPI(query, { variables = null } = {}) {
+async function fetchAPI(query, variables) {
   const headers = { 'Content-Type': 'application/json' }
   const res = await fetch(API_URL, {
     method: 'POST',
@@ -20,7 +20,25 @@ async function fetchAPI(query, { variables = null } = {}) {
 }
 
 export async function getAllPosts(): Promise<PostType[]> {
-  const data = await fetchAPI(allPosts)
+  const data = await fetchAPI(allPosts, null)
+
+  return data.posts.nodes
+}
+
+export async function getAllIds(): Promise<AllIdsType[]> {
+  const data = await fetchAPI(allIds, null)
+
+  return data.posts.nodes
+}
+
+export async function getPost(id: unknown): Promise<PostType> {
+  const data = await fetchAPI(post, id)
+
+  return data.post
+}
+
+export async function getReleatePosts(id: unknown): Promise<PostType> {
+  const data = await fetchAPI(releatePosts, id)
 
   return data.posts.nodes
 }

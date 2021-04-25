@@ -75,7 +75,7 @@ const App: React.FC<StaticProps> = ({ newAllPosts }) => {
         <div className={index.articles} key={n.id}>
           {n.posts.map((post) => (
             <article className={index.article} key={post.id}>
-              <Link href={`posts/${post.id}`}>
+              <Link href={`/posts/${post.id}`}>
                 <a>
                   {post.featuredImage && (
                     <div

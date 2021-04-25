@@ -23,11 +23,11 @@
     min-height: 300px;
     background-size: cover;
     background-position: center;
+    margin-bottom: 10px;
   }
 
   h1 {
     font-size: 1.5rem;
-    margin-top: 10px;
   }
   h2 {
     font-size: 1.3rem;
@@ -55,10 +55,9 @@
     padding: get_vw(10) get_vw(15);
     &__img {
       min-height: 200px;
+      margin-bottom: get_vw(10);
     }
-    h1 {
-      margin-top: get_vw(10);
-    }
+
     iframe {
       height: auto;
     }
