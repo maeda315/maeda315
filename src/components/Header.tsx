@@ -74,17 +74,13 @@ const Header = (): JSX.Element => {
   const searchButton = () => {
     if (router.asPath !== '/') {
       router.push('/')
+      setTimeout(() => {
+        topUpdate()
+      }, 1000)
       return
     }
     topUpdate()
   }
-
-  useEffect(() => {
-    console.log(router.asPath)
-    if (router.asPath === '/') {
-      topUpdate()
-    }
-  }, [router])
 
   const searchReset = () => {
     dispath(newReset())
