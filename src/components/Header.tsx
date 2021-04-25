@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -12,6 +13,7 @@ import header from '../styles/header.module.scss'
 
 const Header = (): JSX.Element => {
   const dispath = useDispatch()
+  const router = useRouter()
   const searchWrap = useRef(null)
   const searchText = useRef(null)
   const searchSelect = useRef(null)
@@ -57,7 +59,7 @@ const Header = (): JSX.Element => {
     }
   }
 
-  const searchButton = () => {
+  const topUpdate = () => {
     dispath(
       fetchAsyncSearch({
         query: getSearch,
@@ -68,6 +70,21 @@ const Header = (): JSX.Element => {
       })
     )
   }
+
+  const searchButton = () => {
+    if (router.asPath !== '/') {
+      router.push('/')
+      return
+    }
+    topUpdate()
+  }
+
+  useEffect(() => {
+    console.log(router.asPath)
+    if (router.asPath === '/') {
+      topUpdate()
+    }
+  }, [router])
 
   const searchReset = () => {
     dispath(newReset())
