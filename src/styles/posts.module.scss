@@ -17,6 +17,7 @@
   word-wrap: break-word;
   box-sizing: border-box;
   margin: 0 auto;
+  word-wrap: break-word;
 
   &__img {
     width: 100%;
@@ -48,6 +49,10 @@
     max-width: 100%;
     min-height: 200px;
     margin-top: 10px;
+  }
+
+  pre {
+    overflow-x: scroll;
   }
 
   @include mq-down(md) {

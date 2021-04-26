@@ -15,7 +15,6 @@ export const API_URL = publicRuntimeConfig.WP_API_URL
 export const fetchAsyncCategories = createAsyncThunk<CategoryNodesType, string>(
   'wp/categories',
   async (query: string) => {
-    console.log('fetchAsyncGet')
     const headers = { 'Content-Type': 'application/json' }
     const res = await fetch(API_URL, {
       method: 'POST',
@@ -46,7 +45,6 @@ export const fetchAsyncSearch = createAsyncThunk<
   })
 
   const json = await res.json()
-  console.log(json)
   if (json.errors) {
     throw new Error('Failed to fetch API')
   }

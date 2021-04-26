@@ -1,10 +1,12 @@
 import Link from 'next/link'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import React from 'react'
 import { getPost, getAllIds, getReleatePosts } from '../../lib/api'
+import { PostType } from '../../modules/commonType'
 import posts from '../../styles/posts.module.scss'
 import index from '../../styles/index.module.scss'
 
-export async function getStaticPaths(context) {
+export const getStaticPaths: GetStaticPaths = async () => {
   const allIds = await getAllIds()
 
   return {
@@ -13,13 +15,11 @@ export async function getStaticPaths(context) {
   }
 }
 
-export async function getStaticProps({ params }) {
-  const post = await getPost({
-    id: params.id
-  })
-  const relatePosts = await getReleatePosts({
-    categoryId: post.categories.nodes[0].categoryId
-  })
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const id = params.id as string
+  const post = await getPost({ id })
+  const categoryId = post.categories.nodes[0].categoryId as number
+  const relatePosts = await getReleatePosts({ categoryId })
 
   return {
     props: {
@@ -29,7 +29,12 @@ export async function getStaticProps({ params }) {
   }
 }
 
-const App: React.FC = ({ post, relatePosts }) => {
+interface AppType {
+  post: PostType
+  relatePosts: PostType[]
+}
+
+const App = ({ post, relatePosts }: AppType): JSX.Element => {
   const createMarkup = () => {
     return { __html: post.content }
   }

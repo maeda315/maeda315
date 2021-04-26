@@ -31,14 +31,16 @@ export async function getAllIds(): Promise<AllIdsType[]> {
   return data.posts.nodes
 }
 
-export async function getPost(id: unknown): Promise<PostType> {
+export async function getPost(id: { id: string }): Promise<PostType> {
   const data = await fetchAPI(post, id)
 
   return data.post
 }
 
-export async function getReleatePosts(id: unknown): Promise<PostType> {
-  const data = await fetchAPI(releatePosts, id)
+export async function getReleatePosts(categoryId: {
+  categoryId: number
+}): Promise<PostType> {
+  const data = await fetchAPI(releatePosts, categoryId)
 
   return data.posts.nodes
 }

@@ -1,6 +1,7 @@
 export interface PostType {
   title: string
   id: string
+  content?: string
   featuredImage: null | {
     node
   }

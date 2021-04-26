@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
+import { GetStaticProps } from 'next'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllPosts } from '../lib/api'
 import { NewAllPostsType, PostType } from '../modules/commonType'
@@ -8,10 +9,6 @@ import index from '../styles/index.module.scss'
 
 interface StaticProps {
   newAllPosts: NewAllPostsType[]
-}
-
-interface StaticPropsType {
-  props: StaticProps
 }
 
 function generatePosts(allPosts: PostType[]) {
@@ -38,7 +35,7 @@ function generatePosts(allPosts: PostType[]) {
   return newAllPosts
 }
 
-export async function getStaticProps(): Promise<StaticPropsType> {
+export const getStaticProps: GetStaticProps = async () => {
   const allPosts = await getAllPosts()
 
   return {

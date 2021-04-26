@@ -83,6 +83,10 @@ const Header = (): JSX.Element => {
   }
 
   const searchReset = () => {
+    if (router.asPath !== '/') {
+      router.push('/')
+      return
+    }
     dispath(newReset())
   }
 
