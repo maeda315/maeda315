@@ -1,0 +1,16 @@
+@import 'global';
+.wrap {
+  text-align: center;
+  img {
+    max-width: 800px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  @include mq-down(md) {
+    img {
+      max-width: 100%;
+    }
+  }
+}
