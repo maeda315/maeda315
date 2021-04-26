@@ -1,11 +1,20 @@
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import Head from '../components/Head'
 import error from '../styles/error.module.scss'
 
 const Custom404: React.FC = () => {
+  const router = useRouter()
   const errorNumber = 1 + Math.floor(Math.random() * 32)
+
   return (
     <div className={error.wrap}>
+      <Head
+        title={'Maeda315 : エラーページ'}
+        description={'Maeda315 用のメモ書き'}
+        url={`${router.asPath}`}
+      />
       <Link href="/">
         <img src={`/error/${errorNumber}.png`} />
       </Link>

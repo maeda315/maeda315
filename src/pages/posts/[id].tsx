@@ -1,8 +1,10 @@
 import Link from 'next/link'
-import { GetStaticProps, GetStaticPaths } from 'next'
 import React from 'react'
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { useRouter } from 'next/router'
 import { getPost, getAllIds, getReleatePosts } from '../../lib/api'
 import { PostType } from '../../modules/commonType'
+import Head from '../../components/Head'
 import posts from '../../styles/posts.module.scss'
 import index from '../../styles/index.module.scss'
 
@@ -35,12 +37,20 @@ interface AppType {
 }
 
 const App = ({ post, relatePosts }: AppType): JSX.Element => {
+  const router = useRouter()
+  const regex = /(<([^>]+)>)/gi
+  const result = post.content.replace(regex, '').slice(0, 100)
   const createMarkup = () => {
     return { __html: post.content }
   }
 
   return (
     <>
+      <Head
+        title={`Maeda315 : ${post.title}`}
+        description={result}
+        url={`${router.asPath}`}
+      />
       <div className={posts.wrap}>
         <article className={posts.posts}>
           {post.featuredImage && (

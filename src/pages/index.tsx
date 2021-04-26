@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getAllPosts } from '../lib/api'
 import { NewAllPostsType, PostType } from '../modules/commonType'
 import { newReset, selectSearch, selectReset } from '../components/headerSlice'
+import Head from '../components/Head'
 import index from '../styles/index.module.scss'
 
 interface StaticProps {
@@ -68,6 +69,11 @@ const App: React.FC<StaticProps> = ({ newAllPosts }) => {
 
   return (
     <>
+      <Head
+        title={'Maeda315'}
+        description={'Maeda315 用のメモ書き'}
+        url={`/`}
+      />
       {posts.map((n) => (
         <div className={index.articles} key={n.id}>
           {n.posts.map((post) => (
