@@ -70,7 +70,7 @@ const App: React.FC<StaticProps> = ({ newAllPosts }) => {
   return (
     <>
       <Head
-        title={'Maeda315'}
+        title={'Maeda315 : Brief note'}
         description={'Maeda315 用のメモ書き'}
         url={`/`}
       />

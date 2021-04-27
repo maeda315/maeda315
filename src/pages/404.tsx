@@ -11,7 +11,7 @@ const Custom404: React.FC = () => {
   return (
     <div className={error.wrap}>
       <Head
-        title={'Maeda315 : エラーページ'}
+        title={'Maeda315 : Error'}
         description={'Maeda315 用のメモ書き'}
         url={`${router.asPath}`}
       />
