@@ -1,6 +1,8 @@
+import getConfig from 'next/config'
 import { PostType, AllIdsType } from '../modules/commonType'
 import { allPosts, allIds, post, releatePosts } from './wp'
-const API_URL = process.env.WP_API_URL
+const { publicRuntimeConfig } = getConfig()
+export const API_URL = publicRuntimeConfig.WP_API_URL
 
 async function fetchAPI(query, variables) {
   const headers = { 'Content-Type': 'application/json' }

@@ -12,7 +12,7 @@ const Carousel = (): JSX.Element => {
       textLink: 'https://github.com/maeda315/fcowl'
     },
     {
-      img: '/swiper/maeda315.png',
+      img: '/ogp.png',
       imgLink: '/',
       text: 'Next.js × GraphQL × AMP',
       textLink: 'https://github.com/maeda315/maeda315'
