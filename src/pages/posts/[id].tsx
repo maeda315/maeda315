@@ -92,7 +92,7 @@ const App = ({ post, relatePosts }: AppType): JSX.Element => {
           )}
         </div>
       </div>
-      <Link href="/">
+      <Link href={`/#block_${post.categories.nodes[0].categoryId}`}>
         <a className={posts.return}>TOP</a>
       </Link>
     </>
