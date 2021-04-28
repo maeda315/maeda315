@@ -2,6 +2,7 @@ export interface PostType {
   title: string
   id: string
   content?: string
+  date?: string
   featuredImage: null | {
     node
   }

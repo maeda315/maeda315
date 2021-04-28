@@ -2,6 +2,7 @@ const fragment = `
   fragment postData on Post {
     title
     id
+    date
     featuredImage {
       node {
         mediaItemUrl
