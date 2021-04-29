@@ -1,12 +1,12 @@
 @import 'global';
 
 .img {
-  height: 300px;
+  height: 350px;
   background-size: cover;
   background-position: center center;
 
   @include mq-down(md) {
-    height: get_vw(200);
+    height: get_vw(250);
   }
 }
 

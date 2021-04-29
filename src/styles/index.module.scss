@@ -12,7 +12,7 @@
   }
 
   @include mq-down(md) {
-    padding: get_vw(10) get_vw(15) 0;
+    padding: get_vw(10) get_vw(10) 0;
 
     &:last-of-type {
       padding-bottom: get_vw(25);
@@ -36,7 +36,7 @@
     > *:first-child {
       display: flex;
       align-items: center;
-      min-height: 150px;
+      min-height: 200px;
     }
   }
   &__img {
@@ -57,8 +57,9 @@
   }
   @include mq-down(md) {
     width: 100%;
-    margin: get_vw(15) get_vw(10) 0;
+    margin: get_vw(15) 0 0;
     a {
+      padding: get_vw(10);
       > *:first-child {
         min-height: get_vw(150);
       }

@@ -33,21 +33,23 @@
 
   h1 {
     font-size: 1.5rem;
-  }
-  h2 {
-    font-size: 1.3rem;
-  }
-  h3 {
-    font-size: 1.2rem;
-  }
-  p {
-    font-size: 1rem;
-    margin-top: 10px;
+    font-weight: bold;
   }
 
-  h2,
+  h2 {
+    color: $gold;
+    font-size: 1.3rem;
+    margin-top: 15px;
+  }
+
   h3 {
-    margin: 10px 0 5px;
+    font-size: 1.2rem;
+    margin-top: 5px;
+  }
+
+  p {
+    font-size: 1rem;
+    margin-top: 5px;
   }
 
   iframe {
@@ -71,11 +73,20 @@
   }
 
   @include mq-down(md) {
-    margin: 0 get_vw(25);
-    padding: get_vw(10) get_vw(15);
+    margin: 0 get_vw(10);
+    padding: get_vw(10) get_vw(10);
     &__img {
       min-height: 200px;
       margin-bottom: get_vw(10);
+    }
+
+    h2 {
+      margin-top: get_vw(15);
+    }
+
+    h3,
+    p {
+      margin-top: get_vw(5);
     }
 
     iframe {

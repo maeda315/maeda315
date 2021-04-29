@@ -53,7 +53,7 @@ $height: 30px;
     top: get_vw(-101);
     left: 0;
     margin-top: 0;
-    border-bottom: get_vw(25) solid $black;
+    border-bottom: get_vw(35) solid $black;
     &::before {
       content: '»';
       font-size: get_vw(35);
@@ -61,7 +61,7 @@ $height: 30px;
       position: absolute;
       right: 0;
       left: get_vw(15);
-      bottom: get_vw(-30);
+      bottom: get_vw(-35);
       margin: auto;
       transform: rotate(90deg);
       color: $white;
