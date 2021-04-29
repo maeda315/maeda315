@@ -31,10 +31,10 @@ const Carousel = (): JSX.Element => {
       loop={true}
       slidesPerView="auto"
       breakpoints={{
-        320: {
+        0: {
           slidesPerView: 1
         },
-        768: {
+        769: {
           slidesPerView: 3
         }
       }}
