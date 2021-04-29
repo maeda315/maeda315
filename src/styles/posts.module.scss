@@ -36,7 +36,8 @@
     font-weight: bold;
   }
 
-  h2 {
+  h2,
+  summary {
     color: $gold;
     font-size: 1.3rem;
     margin-top: 15px;
@@ -80,7 +81,8 @@
       margin-bottom: get_vw(10);
     }
 
-    h2 {
+    h2,
+    summary {
       margin-top: get_vw(15);
     }
 
