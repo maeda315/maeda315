@@ -10,9 +10,16 @@ import index from '../../styles/index.module.scss'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const allIds = await getAllIds()
+  const paths = allIds.map((n) => {
+    return {
+      params: {
+        id: n.id.toString()
+      }
+    }
+  })
 
   return {
-    paths: allIds.map((n) => `/posts/${n.id}`) || [],
+    paths,
     fallback: true
   }
 }
@@ -39,38 +46,38 @@ interface AppType {
 const App = ({ post, relatePosts }: AppType): JSX.Element => {
   const router = useRouter()
   const regex = /(<([^>]+)>)/gi
-  const result = post.content.replace(regex, '').slice(0, 100)
+  const result = post?.content.replace(regex, '').slice(0, 100)
   const createMarkup = () => {
-    return { __html: post.content }
+    return { __html: post?.content }
   }
 
   return (
     <>
       <Head
-        title={`Maeda315 : ${post.title}`}
+        title={`Maeda315 : ${post?.title}`}
         description={result}
         url={`${router.asPath}`}
       />
       <div className={posts.wrap}>
         <article className={posts.posts}>
-          {post.featuredImage && (
+          {post?.featuredImage && (
             <div
               style={{
-                backgroundImage: `url(${post.featuredImage.node.mediaItemUrl})`
+                backgroundImage: `url(${post?.featuredImage.node.mediaItemUrl})`
               }}
               className={posts.posts__img}
             />
           )}
-          <h1>{post.title}</h1>
+          <h1>{post?.title}</h1>
           <section
             className={posts.posts__inner}
             dangerouslySetInnerHTML={createMarkup()}
           ></section>
         </article>
         <div className={index.articles}>
-          {relatePosts.map(
+          {relatePosts?.map(
             (relate) =>
-              post.id !== relate.id && (
+              post?.id !== relate.id && (
                 <article className={index.article} key={relate.id}>
                   <Link href={`/posts/${relate.id}`}>
                     <a>
@@ -92,7 +99,7 @@ const App = ({ post, relatePosts }: AppType): JSX.Element => {
           )}
         </div>
       </div>
-      <Link href={`/#block_${post.categories.nodes[0].categoryId}`}>
+      <Link href={`/#block_${post?.categories.nodes[0].categoryId}`}>
         <a className={posts.return}>TOP</a>
       </Link>
     </>
