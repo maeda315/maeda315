@@ -21,7 +21,7 @@ const App = ({ title, description, url }: Props): JSX.Element => {
       <meta property="og:url" content={`${BASE_URL}${url}`} />
       <meta property="og:image" content={`${BASE_URL}/ogp.png`} />
       <meta property="og:site_name" content={title} />
-      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />

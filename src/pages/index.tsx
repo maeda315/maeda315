@@ -75,9 +75,13 @@ const App: React.FC<StaticProps> = ({ newAllPosts }) => {
         url={`/`}
       />
       {posts.map((n) => (
-        <div id={`block_${n.id}`} className={index.articles} key={n.id}>
+        <div className={index.articles} key={n.id}>
           {n.posts.map((post) => (
-            <article className={index.article} key={post.id}>
+            <article
+              id={`block_${post.id}`}
+              className={index.article}
+              key={post.id}
+            >
               <Link href={`/posts/${post.id}`}>
                 <a>
                   {post.featuredImage && (
