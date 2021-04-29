@@ -28,7 +28,6 @@ const Carousel = (): JSX.Element => {
   return (
     <Swiper
       className={swiper.wrap}
-      slidesPerView={3}
       loop={true}
       breakpoints={{
         0: {
