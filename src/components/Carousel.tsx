@@ -29,11 +29,12 @@ const Carousel = (): JSX.Element => {
     <Swiper
       className={swiper.wrap}
       loop={true}
+      slidesPerView="auto"
       breakpoints={{
-        0: {
+        320: {
           slidesPerView: 1
         },
-        769: {
+        768: {
           slidesPerView: 3
         }
       }}
@@ -53,7 +54,7 @@ const Carousel = (): JSX.Element => {
               target="_blank"
               rel="noreferrer"
             >
-              <>{slide.text}</>
+              <span>{slide.text}</span>
             </a>
           </p>
         </SwiperSlide>
