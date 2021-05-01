@@ -1,7 +1,13 @@
 @import 'global';
 
+.wrap {
+  @include mq-down(md) {
+    margin-top: get_vw(35);
+  }
+}
+
 .img {
-  height: 350px;
+  height: 300px;
   background-size: cover;
   background-position: center center;
 
