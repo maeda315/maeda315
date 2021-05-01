@@ -49,7 +49,7 @@ export const getSearch = `
   ${fragment}
   query Search($search: String, $categoryId: Int) {
     __typename
-    posts(where: {search: $search, categoryId: $categoryId}) {
+    posts(first: 1000, where: {search: $search, categoryId: $categoryId}) {
       nodes {
         ...postData
       }
