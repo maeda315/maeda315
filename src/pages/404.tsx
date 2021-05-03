@@ -15,9 +15,14 @@ const Custom404: React.FC = () => {
         description={'Maeda315 用のメモ書き'}
         url={`${router.asPath}`}
       />
-      <Link href="/">
-        <img src={`/error/${errorNumber}.png`} />
-      </Link>
+      <img src={`/error/${errorNumber}.png`} />
+      <div className={error.balloon}>
+        <p>
+          このページは存在しません
+          <br />
+          <Link href="/">トップ</Link>にお戻りください
+        </p>
+      </div>
     </div>
   )
 }

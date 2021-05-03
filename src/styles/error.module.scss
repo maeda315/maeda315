@@ -3,14 +3,52 @@
   text-align: center;
   img {
     max-width: 800px;
-
-    &:hover {
-      cursor: pointer;
+  }
+  .balloon {
+    max-width: 400px;
+    margin: 1.5em 0;
+    padding: 7px 10px;
+    line-height: 1.5;
+    color: $gold;
+    font-size: 16px;
+    background: $white;
+    border: solid 3px $gold;
+    box-sizing: border-box;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    a {
+      color: inherit;
+    }
+    &::before,
+    &::after {
+      content: '';
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid transparent;
+    }
+    &::before {
+      border-bottom: 10px solid $gold;
+      right: 50%;
+      top: -23px;
+    }
+    &::after {
+      border-bottom: 10px solid $white;
+      right: 50%;
+      top: -18px;
     }
   }
   @include mq-down(md) {
     img {
       max-width: 100%;
+    }
+    .balloon {
+      font-size: get_vw(14);
+      max-width: 90%;
     }
   }
 }

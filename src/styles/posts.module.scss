@@ -115,6 +115,9 @@
   border: 1px solid $black;
   border-radius: 100%;
   background: $white;
+  &:hover {
+    cursor: pointer;
+  }
   @include mq-down(md) {
     font-size: get_vw(12);
     width: get_vw(50);
