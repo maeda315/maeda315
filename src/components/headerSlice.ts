@@ -6,7 +6,7 @@ import {
   CategoryType,
   SearchNodesType,
   SearchType,
-  fetchAsyncSearchType
+  FetchAsyncSearchType
 } from '../modules/commonType'
 import { PostType } from '../modules/commonType'
 const { publicRuntimeConfig } = getConfig()
@@ -34,7 +34,7 @@ export const fetchAsyncCategories = createAsyncThunk<CategoryNodesType, string>(
 
 export const fetchAsyncSearch = createAsyncThunk<
   SearchNodesType,
-  fetchAsyncSearchType
+  FetchAsyncSearchType
 >('wp/search', async (args) => {
   const { query, variables } = args
   const headers = { 'Content-Type': 'application/json' }
