@@ -99,9 +99,9 @@ const App = ({ post, relatePosts }: AppType): JSX.Element => {
           )}
         </div>
       </div>
-      <Link href={`/#block_${post?.id}`}>
-        <a className={posts.return}>TOP</a>
-      </Link>
+      <div onClick={() => router.back()} className={posts.return}>
+        TOP
+      </div>
     </>
   )
 }
