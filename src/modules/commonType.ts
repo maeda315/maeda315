@@ -48,7 +48,7 @@ export interface NewAllPostsType {
   posts: PostType[]
 }
 
-export interface fetchAsyncSearchType {
+export interface FetchAsyncSearchType {
   query: string
   variables: {
     search: string
