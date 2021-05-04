@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import React from 'react'
 import getConfig from 'next/config'
 
 const { publicRuntimeConfig } = getConfig()
@@ -32,4 +33,6 @@ const App = ({ title, description, url }: Props): JSX.Element => {
   )
 }
 
-export default App
+const AppComponent = React.memo(App)
+
+export default AppComponent
