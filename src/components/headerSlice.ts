@@ -7,8 +7,8 @@ import {
   SearchNodesType,
   SearchType,
   FetchAsyncSearchType
-} from '../modules/commonType'
-import { PostType } from '../modules/commonType'
+} from '../types/common'
+import { PostType } from '../types/common'
 const { publicRuntimeConfig } = getConfig()
 export const API_URL = publicRuntimeConfig.WP_API_URL
 

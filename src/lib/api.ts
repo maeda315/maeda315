@@ -1,5 +1,5 @@
 import getConfig from 'next/config'
-import { PostType, AllIdsType } from '../modules/commonType'
+import { PostType, AllIdsType } from '../types/common'
 import { allPosts, allIds, post, releatePosts } from './wp'
 const { publicRuntimeConfig } = getConfig()
 export const API_URL = publicRuntimeConfig.WP_API_URL
