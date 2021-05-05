@@ -9,7 +9,7 @@ import { useAmp } from 'next/amp'
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   const isAmp = useAmp()
   return isAmp ? (
-    <Component />
+    <Component {...pageProps} />
   ) : (
     <Provider store={store}>
       <Header {...pageProps} />

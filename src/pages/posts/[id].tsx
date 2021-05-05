@@ -51,7 +51,7 @@ const App = ({ post, relatePosts }: AppType): JSX.Element => {
   const router = useRouter()
   const isAmp = useAmp()
   const regex = /(<([^>]+)>)/gi
-  const result = post?.content.replace(regex, '').slice(0, 100)
+  const description = post?.content.replace(regex, '').slice(0, 100)
   const createMarkup = () => {
     return { __html: post?.content }
   }
@@ -59,13 +59,13 @@ const App = ({ post, relatePosts }: AppType): JSX.Element => {
   return (
     <>
       {isAmp ? (
-        <AmpPage />
+        <AmpPage post={post} relatePosts={relatePosts} url={router.asPath} />
       ) : (
         <>
           <Head
             title={`Maeda315 : ${post?.title}`}
-            description={result}
-            url={`${router.asPath}`}
+            description={description}
+            url={router.asPath}
           />
           <div className={posts.wrap}>
             <article className={posts.posts}>
