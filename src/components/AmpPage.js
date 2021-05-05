@@ -1,15 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
-import { PostType } from '../types/common'
 export const config = { amp: true }
 
-interface AppType {
-  post: PostType
-  relatePosts: PostType[]
-  url: string
-}
-
-export const Amp = ({ post, relatePosts, url }: AppType): JSX.Element => {
+export const Amp = ({ post, relatePosts, url }) => {
   const regex = /(<([^>]+)>)/gi
   const description = post?.content.replace(regex, '').slice(0, 100)
   const ampMarkup = () => {
