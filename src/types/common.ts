@@ -1,6 +1,6 @@
 export interface PostType {
   title: string
-  id: string
+  postId: number
   content?: string
   date?: string
   featuredImage: null | {
@@ -40,7 +40,7 @@ export interface SearchNodesType {
 }
 
 export interface AllIdsType {
-  id: number
+  postId: number
 }
 
 export interface NewAllPostsType {

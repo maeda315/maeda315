@@ -29,7 +29,7 @@ async function generateSitemapXml(): Promise<string> {
     const date = dateformat(post.date, 'yyyy-mm-dd')
     xml += `
       <url>
-        <loc>${BASE_URL}/posts/${post.id}</loc>
+        <loc>${BASE_URL}/posts/${post.postId}</loc>
         <lastmod>${date}</lastmod>
         <changefreq>weekly</changefreq>
       </url>

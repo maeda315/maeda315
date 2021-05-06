@@ -1,7 +1,7 @@
 const fragment = `
   fragment postData on Post {
     title
-    id
+    postId
     date
     featuredImage {
       node {
@@ -61,7 +61,7 @@ export const allIds = `
     __typename
     posts(first: 1000) {
       nodes {
-        id
+        postId
       }
     }
   }
@@ -71,7 +71,7 @@ export const post = `
   ${fragment}
   query Post($id: ID!) {
     __typename
-    post(id: $id) {
+    post(id: $id,idType: DATABASE_ID) {
       ...postData
       content
     }

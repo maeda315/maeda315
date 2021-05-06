@@ -13,7 +13,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = allIds.map((n) => {
     return {
       params: {
-        id: n.id.toString()
+        id: n.postId.toString()
       }
     }
   })
@@ -24,8 +24,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const id = params.id.toString()
+export const getStaticProps: GetStaticProps = async ({
+  params,
+  previewData
+}) => {
+  console.log('previewData', previewData)
+  const id = +params.id
   const post = await getPost({ id })
   const categoryId = +post.categories.nodes[0].categoryId
   const relatePosts = await getReleatePosts({ categoryId })
@@ -77,9 +81,9 @@ const App = ({ post, relatePosts }: AppType): JSX.Element => {
         <div className={index.articles}>
           {relatePosts?.map(
             (relate) =>
-              post?.id !== relate.id && (
-                <article className={index.article} key={relate.id}>
-                  <Link href={`/posts/${relate.id}`}>
+              post?.postId !== relate.postId && (
+                <article className={index.article} key={relate.postId}>
+                  <Link href={`/posts/${relate.postId}`}>
                     <a>
                       {relate.featuredImage && (
                         <div
@@ -99,7 +103,7 @@ const App = ({ post, relatePosts }: AppType): JSX.Element => {
           )}
         </div>
       </div>
-      <Link href={`/#block_${post?.id}`}>
+      <Link href={`/#block_${post?.postId}`}>
         <a className={posts.return}>TOP</a>
       </Link>
     </>

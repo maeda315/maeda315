@@ -13,6 +13,8 @@ async function fetchAPI(query, variables) {
   })
 
   const json = await res.json()
+  console.log(json)
+
   if (json.errors) {
     console.log(json.errors)
     console.log('error details', query, variables)
@@ -33,7 +35,8 @@ export async function getAllIds(): Promise<AllIdsType[]> {
   return data.posts.nodes
 }
 
-export async function getPost(id: { id: string }): Promise<PostType> {
+export async function getPost(id: { id: number }): Promise<PostType> {
+  console.log(123, id)
   const data = await fetchAPI(post, id)
 
   return data.post
