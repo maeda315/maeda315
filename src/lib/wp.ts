@@ -45,7 +45,7 @@ export const allCategories = `
   }
 `
 
-export const getSearch = `
+export const search = `
   ${fragment}
   query Search($search: String, $categoryId: Int) {
     __typename

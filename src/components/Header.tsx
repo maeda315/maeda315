@@ -7,7 +7,7 @@ import {
   fetchAsyncSearch,
   newReset
 } from './headerSlice'
-import { allCategories, getSearch } from '../lib/wp'
+import { allCategories, search } from '../lib/wp'
 import Carousel from './Carousel'
 import header from '../styles/header.module.scss'
 
@@ -62,7 +62,7 @@ const Header = (): JSX.Element => {
   const topUpdate = () => {
     dispath(
       fetchAsyncSearch({
-        query: getSearch,
+        query: search,
         variables: {
           search: searchText.current.value,
           categoryId: +searchSelect.current.value

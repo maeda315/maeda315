@@ -24,11 +24,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({
-  params,
-  previewData
-}) => {
-  console.log('previewData', previewData)
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = +params.id
   const post = await getPost({ id })
   const categoryId = +post.categories.nodes[0].categoryId
